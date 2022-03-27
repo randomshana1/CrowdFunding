@@ -1,0 +1,9 @@
+# Ignore Mac system files
+.DS_store
+bin
+codedamn.code-workspace
+
+# Ignore bin files
+*.abi
+*.bin
+*.json
