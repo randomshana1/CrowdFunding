@@ -15,7 +15,7 @@ contract CrowdFunding{
         minContribution = 100 wei;
         deadline = block.timestamp + _deadline;
         targetAmount = _targetAmount;
-        manager = msg.sender;
+        manager = payable (msg.sender);
     }
 
     function sendEth() payable public {
@@ -33,6 +33,14 @@ contract CrowdFunding{
 
     function getContractBalance() public view returns(uint){
         return address(this).balance;
+    }
+
+    function refund() payable public{
+        require(block.timestamp > deadline && raisedAmount < targetAmount,"You are not eligible for refund!");
+        require(contributors[msg.sender]>0,"you haven't contributed anything, so you are not eligible for refund!");
+
+        address payable user = payable (msg.sender);
+        user.transfer(contributors[msg.sender]);
     }
 
 }
