@@ -26,8 +26,9 @@ contract CrowdFunding{
         if(contributors[msg.sender] == 0){
             noOfContributors ++;
         }
+        
         contributors[msg.sender] += msg.value;
-        raisedAmount += msg.value;
+        raisedAmount =msg.value + msg.value;
 
     }
 
